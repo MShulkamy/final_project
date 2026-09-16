@@ -3,16 +3,24 @@ import 'package:http/http.dart' as http;
 import '../models/product.dart';
 
 class ProductService {
-  static const String baseUrl = 'https://fakestoreapi.com';
+  // DummyJSON — free REST API with a large product catalog.
+  static const String baseUrl = 'https://dummyjson.com';
+
+  // Handles both response shapes: a raw array or { "products": [...] }
+  List<Product> _parseList(dynamic decoded) {
+    final List<dynamic> items = (decoded is Map && decoded['products'] is List)
+        ? decoded['products'] as List<dynamic>
+        : decoded as List<dynamic>;
+    return items.map((json) => Product.fromJson(json)).toList();
+  }
 
   // Fetch all products
   Future<List<Product>> fetchProducts() async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/products'));
+      final response = await http.get(Uri.parse('$baseUrl/products?limit=100'));
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonData = json.decode(response.body);
-        return jsonData.map((json) => Product.fromJson(json)).toList();
+        return _parseList(json.decode(response.body));
       } else {
         throw Exception('Failed to load products: ${response.statusCode}');
       }
@@ -29,8 +37,7 @@ class ProductService {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonData = json.decode(response.body);
-        return jsonData.map((json) => Product.fromJson(json)).toList();
+        return _parseList(json.decode(response.body));
       } else {
         throw Exception('Failed to load products: ${response.statusCode}');
       }
@@ -62,8 +69,12 @@ class ProductService {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonData = json.decode(response.body);
-        return jsonData.map((e) => e.toString()).toList();
+        final dynamic decoded = json.decode(response.body);
+        final List<dynamic> items = decoded is List ? decoded : (decoded['categories'] ?? []);
+        return items
+            .map((e) => e is Map ? (e['name'] ?? e['slug'] ?? '').toString() : e.toString())
+            .where((s) => s.isNotEmpty)
+            .toList();
       } else {
         throw Exception('Failed to load categories: ${response.statusCode}');
       }

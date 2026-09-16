@@ -18,14 +18,19 @@ class Product {
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    final reviews = json['reviews'];
+    final rating = Rating.fromJson(json['rating']);
+
     return Product(
       id: json['id'],
       title: json['title'],
       price: (json['price'] as num).toDouble(),
       description: json['description'] ?? '',
-      category: json['category'] ?? '',
-      image: json['image'] ?? '',
-      rating: Rating.fromJson(json['rating'] ?? {}),
+      category: json['category']?.toString() ?? '',
+      image: json['image'] ?? json['thumbnail'] ?? '',
+      rating: (rating.count == 0 && reviews is List && reviews.isNotEmpty)
+          ? Rating(rate: rating.rate, count: reviews.length)
+          : rating,
     );
   }
 
@@ -51,11 +56,17 @@ class Rating {
     required this.count,
   });
 
-  factory Rating.fromJson(Map<String, dynamic> json) {
-    return Rating(
-      rate: (json['rate'] ?? 0.0).toDouble(),
-      count: json['count'] ?? 0,
-    );
+  factory Rating.fromJson(dynamic json) {
+    if (json is num) {
+      return Rating(rate: json.toDouble(), count: 0);
+    }
+    if (json is Map) {
+      return Rating(
+        rate: (json['rate'] ?? 0.0).toDouble(),
+        count: json['count'] ?? 0,
+      );
+    }
+    return Rating(rate: 0.0, count: 0);
   }
 
   Map<String, dynamic> toJson() {

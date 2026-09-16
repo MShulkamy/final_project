@@ -21,7 +21,7 @@ A production-ready e-commerce mobile application built with **Flutter**, followi
 
 ### 🏠 Home
 - Clean header with **Fashion Store** branding
-- Real-time product listing from the [Fake Store API](https://fakestoreapi.com)
+- Real-time product listing from the [DummyJSON API](https://dummyjson.com)
 - 2-column responsive product grid with reusable `ProductCard` widget
 - Light / Dark mode toggle
 
