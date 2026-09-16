@@ -1,219 +1,168 @@
-# 🛍️ Fashion Store – Flutter E-commerce App
+<div align="center">
 
-A **production-ready E-commerce mobile application** built with **Flutter**, following **Clean Architecture** principles and using **Provider** for state management. The app delivers a modern, minimalist shopping experience with real-time products, Firebase Authentication, Firestore user profiles, and Dark Mode support.
+# 🛍️ Fashion Store — Flutter E-Commerce App
+
+A production-ready e-commerce mobile application built with **Flutter**, following **Clean Architecture** principles and using **Provider** for state management.
+
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-Auth%20%2B%20Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
+
+</div>
 
 ---
 
 ## ✨ Features
 
 ### 🔐 Authentication
-
-* Firebase Authentication
-
-  * Sign Up
-  * Login
-  * Sign Out
-* Firestore integration to store user data:
-
-  * First Name
-  * Last Name
-  * Email
+- Email & password **Sign Up / Sign In / Sign Out** with Firebase Authentication
+- **Forgot Password** — send a password reset link straight to the user's inbox
+- User profiles stored in **Cloud Firestore** (first name, last name, email)
 
 ### 🏠 Home
+- Clean header with **Fashion Store** branding
+- Real-time product listing from the [Fake Store API](https://fakestoreapi.com)
+- 2-column responsive product grid with reusable `ProductCard` widget
+- Light / Dark mode toggle
 
-* Clean header with **Fashion Store** title
-* Light / Dark Mode toggle
-* Real-time product listing from Fake Store API
-* 2-column responsive `GridView`
-* Reusable `ProductCard` widget
+### 👕 Product Details
+- Full product view — image, title, category, price and rating
+- Quantity selector and "Add to Cart" action
 
 ### 🛒 Cart
-
-* Add / Remove products
-* Update quantities
-* Cart summary section:
-
-  * Subtotal
-  * Shipping
-  * Total Price
+- Add / remove products and update quantities
+- Live cart summary: subtotal, shipping and total price
 
 ### 👤 Profile
-
-* Display user data from Firestore
-* Cartoon-style customer service avatar
-* Logout functionality
+- User data loaded from Firestore
+- Customer-service avatar and logout
 
 ### 🌙 Theme
-
-* Light Mode:
-
-  * Primary Color: `#8E6CEF`
-  * Background: `#FFFFFF`
-* Dark Mode:
-
-  * Background: `#000000`
-* Fully dynamic UI (all widgets react to theme changes)
+- Complete **Light / Dark** theme — every widget reacts instantly
+- Theme preference is **persisted** with `SharedPreferences`
 
 ---
 
-## 🧱 Architecture
+## 📸 Screenshots
 
-The project follows **Clean Architecture** for scalability, maintainability, and testability.
+| Login | Sign Up | Home |
+|:-:|:-:|:-:|
+| ![Login](screenshots/01-login.png) | ![Sign Up](screenshots/02-signup.png) | ![Home](screenshots/03-home.png) |
+
+| Product Details | Cart | Profile |
+|:-:|:-:|:-:|
+| ![Product Details](screenshots/04-product-details.png) | ![Cart](screenshots/05-cart.png) | ![Profile](screenshots/06-profile.png) |
+
+| Dark Mode |
+|:-:|
+| ![Dark Mode](screenshots/07-dark-mode.png) |
+
+---
+
+## 🏗️ Architecture
+
+The project follows **Clean Architecture** for scalability, maintainability and testability.
 
 ```
 lib/
 │
 ├── core/
-│   └── app_colors.dart
+│   └── app_colors.dart          # Brand colors + gradients
 │
 ├── models/
-│   ├── product.dart
-│   └── cart_item.dart
+│   ├── product.dart             # Product model
+│   └── cart_item.dart           # Cart item model
 │
 ├── services/
-│   ├── auth_service.dart
-│   └── product_service.dart
+│   ├── auth_service.dart        # Firebase Auth + Firestore users
+│   └── product_service.dart     # REST API (Fake Store API)
 │
 ├── providers/
-│   ├── cart_provider.dart
-│   └── theme_provider.dart
+│   ├── cart_provider.dart       # Cart state management
+│   └── theme_provider.dart      # Light/Dark theme + persistence
 │
 ├── screens/
-│   ├── auth/
-│   │   ├── login_screen.dart
-│   │   └── signup_screen.dart
-│   ├── home_screen.dart
+│   ├── login_screen.dart        # Sign in + password reset
+│   ├── signup_screen.dart       # Create account
+│   ├── main_wrapper.dart        # Bottom navigation shell
+│   ├── home_screen.dart         # Product feed
+│   ├── product_detail_screen.dart
 │   ├── cart_screen.dart
-│   ├── profile_screen.dart
-│   └── main_wrapper.dart
+│   └── profile_screen.dart
 │
 ├── widgets/
+│   ├── custom_button.dart
 │   ├── custom_text_field.dart
 │   └── product_card.dart
 │
-└── main.dart
+└── main.dart                    # App entry + auth gate
 ```
-
----
-
-## 📦 Models
-
-### Product
-
-```dart
-title
-price
-image
-category
-```
-
-### CartItem
-
-```dart
-id
-title
-price
-image
-size
-quantity
-```
-
----
-
-## 🔌 Services
-
-### AuthService
-
-* Firebase Authentication
-* Firestore user storage
-
-### ProductService
-
-* Fetch products from:
-
-  ```
-  https://fakestoreapi.com/products
-  ```
-* Uses `http` package
-
----
-
-## 🧠 State Management
-
-### Provider
-
-* `CartProvider`
-
-  * Add / Remove items
-  * Update quantity
-  * Calculate total price
-
-* `ThemeProvider`
-
-  * Toggle Light / Dark Mode
-
----
-
-## 🎨 UI & Design
-
-* Material 3 enabled
-* Minimalist aesthetic
-* Fully responsive layouts
-* Theme-aware custom widgets
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Flutter (Material 3)
-* Provider
-* Firebase Auth
-* Cloud Firestore
-* HTTP package
-* REST API
+| Layer | Technology |
+|---|---|
+| **Framework** | Flutter (Material 3) |
+| **Language** | Dart |
+| **State Management** | Provider |
+| **Authentication** | Firebase Auth |
+| **Database** | Cloud Firestore |
+| **Networking** | `http` + REST API |
+| **Local Storage** | `shared_preferences` |
+| **UI** | Google Fonts, Cached Network Image |
 
 ---
 
 ## 🚀 Getting Started
 
 ### 1️⃣ Clone the repository
-
 ```bash
 git clone https://github.com/MShulkamy/final_project.git
+cd final_project
 ```
 
 ### 2️⃣ Install dependencies
-
 ```bash
 flutter pub get
 ```
 
 ### 3️⃣ Configure Firebase
-
-* Add `google-services.json`
-* Enable Authentication & Firestore
+1. Create a project on [Firebase Console](https://console.firebase.google.com)
+2. Enable **Authentication → Email/Password**
+3. Create a **Cloud Firestore** database
+4. Register an Android app with your package name and download `google-services.json` into `android/app/`
+5. (Optional) For web/desktop run:
+```bash
+dart pub global activate flutterfire_cli
+flutterfire configure
+```
 
 ### 4️⃣ Run the app
-
 ```bash
 flutter run
 ```
 
 ---
 
-## 📌 Notes
+## 📂 Project Structure Highlights
 
-* Dark Mode is fully dynamic
-* Clean Architecture ensures easy scalability
-* Ready for production deployment
+- **`auth_service.dart`** — all auth flows in one place: sign up, sign in, sign out and password reset, with human-readable error messages for every Firebase error code
+- **`cart_provider.dart`** — add, remove, update quantity and compute totals
+- **`theme_provider.dart`** — dynamic light/dark themes with saved preference
+- **`product_service.dart`** — clean REST integration with error handling
 
 ---
 
 ## 👨‍💻 Author
 
-**MShulkamy**
-Flutter Developer
+**Mostafa Sholkamy** — Flutter & Front-End Developer
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-8E6CEF?style=flat-square&logo=googlechrome&logoColor=white)](https://mostafa-portfolio.pages.dev)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mostafa-sholkamy-234238390)
+[![Email](https://img.shields.io/badge/Email-Contact-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:mostafasholkamy50@gmail.com)
 
 ---
 
-⭐ If you like this project, don’t forget to star the repository!
+⭐ If you like this project, don't forget to star the repository!

@@ -62,7 +62,7 @@ class CartScreen extends StatelessWidget {
                       Icon(
                         Icons.shopping_cart_outlined,
                         size: 120,
-                        color: AppColors.greyText.withOpacity(0.5),
+                        color: AppColors.greyText.withValues(alpha: 0.5),
                       ),
                       const SizedBox(height: 24),
                       Text(
@@ -113,7 +113,7 @@ class CartScreen extends StatelessWidget {
                                   height: 80,
                                   decoration: BoxDecoration(
                                     color: isDarkMode
-                                        ? AppColors.darkSurface.withOpacity(0.5)
+                                        ? AppColors.darkSurface.withValues(alpha: 0.5)
                                         : AppColors.lightSurface,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
@@ -255,7 +255,7 @@ class CartScreen extends StatelessWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 10,
                             offset: const Offset(0, -4),
                           ),
