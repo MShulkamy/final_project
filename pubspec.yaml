@@ -24,7 +24,7 @@ dependencies:
   # UI Components
   cupertino_icons: ^1.0.6
   google_fonts: ^8.2.1
-  cached_network_image: ^4.0.0
+  cached_network_image: ^3.4.1
   
   # Utilities
   shared_preferences: ^2.2.2
