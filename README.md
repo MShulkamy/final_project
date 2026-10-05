@@ -7,6 +7,7 @@ A production-ready e-commerce mobile application built with **Flutter**, followi
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-Auth%20%2B%20Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
+[![Live demo](https://img.shields.io/badge/Live_demo-fashion--store--demo.pages.dev-2563EB?style=for-the-badge)](https://fashion-store-demo.pages.dev)
 
 </div>
 
